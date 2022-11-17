@@ -203,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                     labelText: "Title",
                     hintText: "Enter title here..."),
                 controller: titleController,
-                validator: (val) => (val!.isEmpty) ? "Enter name first" : null,
+                validator: (val) => (val!.isEmpty) ? "Enter title first" : null,
                 onSaved: (val) {
                   Global.title = val;
                 },
@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                     labelText: "Detail",
                     hintText: "Enter detail here..."),
                 controller: detailsController,
-                validator: (val) => (val!.isEmpty) ? "Enter age first" : null,
+                validator: (val) => (val!.isEmpty) ? "Enter details first" : null,
                 onSaved: (val) {
                   Global.details = val;
                 },
