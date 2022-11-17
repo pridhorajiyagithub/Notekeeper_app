@@ -131,33 +131,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       )
-                      /*child: ListTile(
-                      //leading : Text("${documents[index].id}"),
-                      focusColor: Colors.blueGrey,
-                      isThreeLine: true,
-                      leading:
-                      title: Text("${documents[index]['title']}"),
-                      trailing: Row(
-
-                          children: [
-                            IconButton(
-                              onPressed: () async {
-                                */ /*await CloudFirestoreHelper.cloudFirestoreHelper
-                                    .updateRecord(id: "${documents[index]}");*/ /*
-                                validateAndEditData(id: documents[index].id);
-                              },
-                              icon: const Icon(Icons.edit),
-                            ),
-                            IconButton(
-                              onPressed: () async {
-                                await CloudFirestoreHelper.cloudFirestoreHelper
-                                    .deleteRecord(id: documents[index].id);
-                              },
-                              icon: const Icon(Icons.delete),
-                            )
-                          ]),
-                      subtitle: Text("${documents[index]['details']}"),
-                    ),*/
+                     
                       ),
                 );
               },
@@ -193,8 +167,7 @@ class _HomePageState extends State<HomePage> {
                     'title': Global.title,
                     'details': Global.details,
                   };
-                  /*CloudFirestoreHelper.cloudFirestoreHelper
-                      .insertRecord(data: data);*/
+                 
                   CloudFirestoreHelper.cloudFirestoreHelper
                       .insertRecord(data: data);
                   titleController.clear();
@@ -204,9 +177,6 @@ class _HomePageState extends State<HomePage> {
                     Global.details = "";
                   });
                   Navigator.of(context).pop();
-
-                  // await CloudFirestoreHelper.cloudFirestoreHelper
-                  //     .insertRecord();
                 }
               },
               child: const Text("Add")),
