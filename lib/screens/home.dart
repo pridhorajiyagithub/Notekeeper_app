@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,6 +19,14 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<FormState> updateFormKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
+  final _random = Random();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,8 +58,11 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
-                          color: Colors.primaries[
-                                  Random().nextInt(Colors.accents.length)]
+                          color: Color.fromARGB(
+                                  _random.nextInt(255),
+                                  _random.nextInt(255),
+                                  _random.nextInt(255),
+                                  _random.nextInt(255))
                               .withOpacity(0.5),
                           borderRadius: BorderRadius.circular(7),
                         ),
@@ -80,8 +92,6 @@ class _HomePageState extends State<HomePage> {
                                 const Spacer(),
                                 IconButton(
                                   onPressed: () async {
-                                    /*await CloudFirestoreHelper.cloudFirestoreHelper
-                                    .updateRecord(id: "${documents[index]}");*/
                                     validateAndEditData(
                                         id: documents[index].id);
                                   },
@@ -111,11 +121,11 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  height: 15,
-                                  width: 15,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black)),
+                                const Text(
+                                  "✔️",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 20,
@@ -130,9 +140,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                      )
-                     
-                      ),
+                      )),
                 );
               },
             );
@@ -167,7 +175,8 @@ class _HomePageState extends State<HomePage> {
                     'title': Global.title,
                     'details': Global.details,
                   };
-                 
+                  /*CloudFirestoreHelper.cloudFirestoreHelper
+                      .insertRecord(data: data);*/
                   CloudFirestoreHelper.cloudFirestoreHelper
                       .insertRecord(data: data);
                   titleController.clear();
@@ -177,6 +186,9 @@ class _HomePageState extends State<HomePage> {
                     Global.details = "";
                   });
                   Navigator.of(context).pop();
+
+                  // await CloudFirestoreHelper.cloudFirestoreHelper
+                  //     .insertRecord();
                 }
               },
               child: const Text("Add")),
@@ -203,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                     labelText: "Title",
                     hintText: "Enter title here..."),
                 controller: titleController,
-                validator: (val) => (val!.isEmpty) ? "Enter title first" : null,
+                validator: (val) => (val!.isEmpty) ? "Enter name first" : null,
                 onSaved: (val) {
                   Global.title = val;
                 },
@@ -218,7 +230,8 @@ class _HomePageState extends State<HomePage> {
                     labelText: "Detail",
                     hintText: "Enter detail here..."),
                 controller: detailsController,
-                validator: (val) => (val!.isEmpty) ? "Enter details first" : null,
+                validator: (val) =>
+                    (val!.isEmpty) ? "Enter details first" : null,
                 onSaved: (val) {
                   Global.details = val;
                 },
