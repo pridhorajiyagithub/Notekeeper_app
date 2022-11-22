@@ -40,7 +40,6 @@ class CloudFirestoreHelper {
 
     return notesRef.snapshots();
   }
-
 //todo: updateRecord
 
   Future<void> updateRecord(
